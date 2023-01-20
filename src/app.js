@@ -26,6 +26,6 @@ app.use(dbConnection(), ()=> {
     dbConnection()
 })
 
-app.listen(process.env.SERVER_PORT, () => {
-    console.log(`The app is running on ${process.env.SERVER_PORT}`)
+app.listen(process.env.PORT, () => {
+    console.log(`The app is running on ${process.env.PORT}`)
 })
