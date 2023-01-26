@@ -32,7 +32,7 @@ app.use(cookieParser())
 
 //inicializando rutas
 app.use(userRouters)
-app.use(router)
+app.use(homeRoutes)
 
 //inicializando la conexion de la base de datos.
 
