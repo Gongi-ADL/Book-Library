@@ -5,7 +5,12 @@ import express from 'express';
 import bodyparser from 'body-parser';
 import dotenv from 'dotenv'
 import bd from './database/connection.js'
+
+
+//importando las rutas
 import userRouters from './router/users.router.js'
+import homeRoutes from './router/home.routes.js';
+
 
 //importando modelos de tablas
 import './models/books.js';
@@ -23,9 +28,11 @@ const app = express()
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded( {extended: true} ));
 app.use(cookieParser())
-//importando rutas
 
+
+//inicializando rutas
 app.use(userRouters)
+app.use(router)
 
 //inicializando la conexion de la base de datos.
 
