@@ -1,17 +1,27 @@
-import { DataTypes } from 'sequelize';
-import bd from '../db/connection.js';
+import { DataTypes } from "sequelize";
+import db from "../database/connection.js";
 
-const Books = bd.define('Book', ({
-  book_name:{
-    type: DataTypes.STRING
+//creando modelo de la tabla books
+
+export const Book = db.define('books',{
+
+  id_book:{
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
   },
-  book_desc:{
-    type: DataTypes.STRING
-  },  
-  book_img:{
-    type: DataTypes.STRING
-  },  
-  id_category:{
-    type: DataTypes.INTEGER
-  } 
-}))
+  book_name:{
+    type: DataTypes.STRING,
+    allowNull:false
+  },
+  book_price:{
+    type:DataTypes.STRING,
+    allowNull:false
+  },
+  book_date:{
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+
+}, {timestamps: false})
