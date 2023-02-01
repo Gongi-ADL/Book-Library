@@ -15,17 +15,13 @@ export const Book = db.define('books',{
     type: DataTypes.STRING,
     allowNull:false
   },
-  book_desc:{
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  author:{
-    type: DataTypes.STRING,
-    allowNull: false
-  },
   book_price:{
     type:DataTypes.STRING,
     allowNull:false
+  },
+  book_date:{
+    type: DataTypes.STRING,
+    allowNull: false
   }
 
 }, {timestamps: false})

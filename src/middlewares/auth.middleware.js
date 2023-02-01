@@ -1,7 +1,7 @@
 const authMid = (req, res, next) => {
     try{
         if(req.cookies.session_token){
-            res.send('entraste  ')
+            next()
         }
         else{
             res.send(`No estas logeado`)

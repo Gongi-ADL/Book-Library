@@ -10,12 +10,14 @@ import bd from './database/connection.js'
 //importando las rutas
 import userRouters from './router/users.router.js'
 import homeRoutes from './router/home.routes.js';
+import bookRoutes from './router/books.routes.js';
 
 
 //importando modelos de tablas
 import './models/books.js';
-import './models/categories.js'
+import './models/desc.js'
 import './models/users.js'
+import './models/author.js'
 import cookieParser from 'cookie-parser';
 
 
@@ -33,6 +35,7 @@ app.use(cookieParser())
 //inicializando rutas
 app.use(userRouters)
 app.use(homeRoutes)
+app.use(bookRoutes)
 
 //inicializando la conexion de la base de datos.
 
@@ -41,7 +44,7 @@ const dbConnection = async() => {
 
         await bd.authenticate();
         console.log('You are succesfully connected to the database')
-        // await bd.sync({force: true})
+        // await bd.sync({alter: true})
 
     } catch (error) {
 
