@@ -1,7 +1,7 @@
 import { where } from "sequelize"
 import { Book } from "../models/books.js"
 
-const createBook = async (req, res) => {
+const create = async (req, res) => {
     const { book, price, date } = req.body
     try{
         const newBook = await Book.create({
@@ -9,7 +9,7 @@ const createBook = async (req, res) => {
             book_price: price,
             book_date: date
         })
-        res.sendStatus(201)
+        res.status(201).json('The book has been created')
     }catch(error){
         res.sendStatus(401)
         console.log(error)
@@ -17,7 +17,11 @@ const createBook = async (req, res) => {
 }
 
 const getBooks = async (req, res) => {
-    const getBooks = await Book.findAll()
+    const {limit, offset} = req.params
+    const getBooks = await Book.findAll({
+        limit: 5,
+        offset: 0
+    })
     res.send(getBooks)
 }
 
@@ -31,7 +35,7 @@ const getBook = async (req, res) => {
     res.status(202).json(getBook)
 }
 
-const updateBook = async(req, res) => {
+const update = async(req, res) => {
     const {book} = req.body
     const updatingBook = Book.update({
         book_name : book
@@ -41,10 +45,10 @@ const updateBook = async(req, res) => {
             id_book: req.params.id
         }
     })
-    res.sendStatus(202)
+    res.status(201).json('The book is updated')
 }
 
-const destroyBook = async(req, res) => {
+const destroy = async(req, res) => {
         Book.destroy({
             where: {
                 id_book: req.params.id
@@ -55,9 +59,9 @@ const destroyBook = async(req, res) => {
 
     
 export{
-    createBook,
+    create,
     getBook,
     getBooks,
-    updateBook,
-    destroyBook
+    update,
+    destroy
 }

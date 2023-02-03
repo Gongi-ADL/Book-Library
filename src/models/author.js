@@ -13,10 +13,6 @@ export const author = db.define('author', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    author:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     author_gender:{
         type: DataTypes.STRING,
         allowNull: false
