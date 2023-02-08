@@ -1,8 +1,28 @@
 import { where } from "sequelize"
-import { Book } from "../models/books.js"
 
+//importando modelos de tablas:
+import { Book } from "../models/books.js"
+import { bookFile } from "../models/bookFiles.js"
+
+
+//importando controladores de Cloudinary:
+import { uploadImage, deleteImage } from "../libs/Cloudinary.js"
+
+
+//creando controladores
 const create = async (req, res) => {
+    let image;
+    if (req.files){
+       const result = await uploadImage(req.files[0].path)
+       await fs.remove(req.files[0].path)
+       image = {
+        bookImg: result.secure_url,
+        ImgPublicId: result.public_id,
+       }
+    }
+
     const { book, price, date } = req.body
+    const { bookImg, ImgPublicId } = image
     try{
         const newBook = await Book.create({
             book_name: book,
@@ -27,10 +47,12 @@ const getBooks = async (req, res) => {
 
 
 const getBook = async (req, res) => {
+    
     const getBook = await Book.findAll({
         where:{
             book_name: req.params.book
-        }
+        },
+        include: bookFile
     })
     res.status(202).json(getBook)
 }

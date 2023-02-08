@@ -23,12 +23,3 @@ export const author = db.define('author', {
     }
 }, {timestamps: false})
 
-author.hasMany(Book,{
-    foreignKey: 'author_book',
-    sourceKey: 'author_id'
-})
-
-Book.belongsTo(author, {
-    foreignKey: 'author_book',
-    targetKey: 'author_id'
-})

@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize";
 import db from "../database/connection.js";
 
+import { bookFile } from "./bookFiles.js";
+
 //creando modelo de la tabla books
 
 export const Book = db.define('books',{

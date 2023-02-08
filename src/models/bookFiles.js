@@ -1,7 +1,8 @@
 import db from "../database/connection.js";
-import { DataType, DataTypes } from "sequelize";
+import {DataTypes } from "sequelize";
+import { Book } from "./books.js";
 
-const bookFile = db.define('book_files', {
+export const bookFile = db.define('book_files', {
     id_file:{
         type: DataTypes.INTEGER,
         autoIncrement: true, 

@@ -17,6 +17,7 @@ import './models/books.js';
 import './models/desc.js'
 import './models/users.js'
 import './models/author.js'
+import './database/associatons.js'
 import cookieParser from 'cookie-parser';
 
 
