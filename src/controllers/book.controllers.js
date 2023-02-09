@@ -9,26 +9,40 @@ import { bookFile } from "../models/bookFiles.js"
 import { uploadImage, deleteImage } from "../libs/Cloudinary.js"
 
 
+//configurando variables de entorno:
+import dotenv from 'dotenv'
+dotenv.config()
+
 //creando controladores
 const create = async (req, res) => {
+    
+    const { book, price, date } = req.body
+    
+    
     let image;
     if (req.files){
        const result = await uploadImage(req.files[0].path)
-       await fs.remove(req.files[0].path)
        image = {
         bookImg: result.secure_url,
         ImgPublicId: result.public_id,
        }
-    }
 
-    const { book, price, date } = req.body
-    const { bookImg, ImgPublicId } = image
+       const { bookImg, ImgPublicId } = image //este const va aca porque no puede acceder a los datos antes de que sea inicializado
+    }
     try{
         const newBook = await Book.create({
             book_name: book,
             book_price: price,
             book_date: date
         })
+        console.log(newBook.dataValues.id_book)
+        const addImage = await bookFile.create({
+            book_img: image.bookImg,
+            book_file: 'for example',
+            cloudinary_id: image.ImgPublicId,
+            bookIdBook: newBook.dataValues.id_book
+        })
+        
         res.status(201).json('The book has been created')
     }catch(error){
         res.sendStatus(401)
@@ -40,7 +54,7 @@ const getBooks = async (req, res) => {
     const {limit, offset} = req.params
     const getBooks = await Book.findAll({
         limit: 5,
-        offset: 0
+        offset: process.env.OFFSET
     })
     res.send(getBooks)
 }
@@ -54,7 +68,7 @@ const getBook = async (req, res) => {
         },
         include: bookFile
     })
-    res.status(202).json(getBook)
+    res.status(200).json(getBook)
 }
 
 const update = async(req, res) => {
