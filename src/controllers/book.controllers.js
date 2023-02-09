@@ -35,7 +35,6 @@ const create = async (req, res) => {
             book_price: price,
             book_date: date
         })
-        console.log(newBook.dataValues.id_book)
         const addImage = await bookFile.create({
             book_img: image.bookImg,
             book_file: 'for example',
