@@ -13,10 +13,6 @@ export const author = db.define('author', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    author:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     author_gender:{
         type: DataTypes.STRING,
         allowNull: false
@@ -27,12 +23,3 @@ export const author = db.define('author', {
     }
 }, {timestamps: false})
 
-author.hasMany(Book,{
-    foreignKey: 'author_book',
-    sourceKey: 'author_id'
-})
-
-Book.belongsTo(author, {
-    foreignKey: 'author_book',
-    targetKey: 'author_id'
-})

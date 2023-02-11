@@ -6,7 +6,6 @@ import bodyparser from 'body-parser';
 import dotenv from 'dotenv'
 import bd from './database/connection.js'
 
-
 //importando las rutas
 import userRouters from './router/users.router.js'
 import homeRoutes from './router/home.routes.js';
@@ -18,7 +17,9 @@ import './models/books.js';
 import './models/desc.js'
 import './models/users.js'
 import './models/author.js'
+import './database/associatons.js'
 import cookieParser from 'cookie-parser';
+
 
 
 
@@ -27,8 +28,8 @@ dotenv.config()
 
 const app = express()
 
-app.use(bodyparser.json())
-app.use(bodyparser.urlencoded( {extended: true} ));
+app.use(bodyparser.json({limit: '50mb'}))
+app.use(bodyparser.urlencoded( {extended: false, limit: '50mb'}, ));
 app.use(cookieParser())
 
 

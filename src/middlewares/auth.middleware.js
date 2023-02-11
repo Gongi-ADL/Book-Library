@@ -4,7 +4,7 @@ const authMid = (req, res, next) => {
             next()
         }
         else{
-            res.send(`No estas logeado`)
+            res.status(401)
         }
     }
     catch(error){
