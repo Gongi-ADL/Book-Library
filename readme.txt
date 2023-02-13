@@ -1,8 +1,10 @@
 
 //PASOS PARA INICIAR LA APP:
 
-Cuando recién clone la aplicación desde su repositorio en git. Necesitará moverse a la carpeta desde la consola de windows (CMD) utilizando el comando cd ruta/de/la/carpeta y
-luego debe ejectar el comando npm install. En caso de que habrás una terminal directamente desde Visual Studio Code (en el proyecto) solo debes ejecutar el npm install.
+Cuando recién clone la aplicación desde su repositorio en git. Necesitará moverse a la carpeta desde la consola de windows (CMD) utilizando el comando: cd ruta/de/la/carpeta 
+y luego debe ejectar el comando: npm install. 
+
+En caso de que habrás una terminal directamente desde Visual Studio Code (en el proyecto) solo debes ejecutar el npm install para instalar todos sus paquetes.
 
 //Tech Stack
 
