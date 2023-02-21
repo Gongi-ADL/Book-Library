@@ -4,6 +4,7 @@ console.clear()
 import express from 'express';
 import bodyparser from 'body-parser';
 import dotenv from 'dotenv'
+import cors from 'cors'
 import bd from './database/connection.js'
 
 //importando las rutas
@@ -31,6 +32,7 @@ const app = express()
 app.use(bodyparser.json({limit: '50mb'}))
 app.use(bodyparser.urlencoded( {extended: false, limit: '50mb'}, ));
 app.use(cookieParser())
+app.use(cors( { origin: "http://localhost:5173", credentials: true } ));
 
 
 //inicializando rutas
