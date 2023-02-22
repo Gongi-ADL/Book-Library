@@ -5,7 +5,6 @@ This is a Book Library API in order to improve my abilities
 ## Tech Stack
 
 NodeJS, Express, Sequelize (MySQL) -- Backend
-Vite, React, JavaScrpit -- Frontend
 
 ## Run Locally
 
