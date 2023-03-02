@@ -8,6 +8,10 @@ import { bookFile } from "../models/bookFiles.js"
 //importando controladores de Cloudinary:
 import { uploadImage, deleteImage } from "../libs/Cloudinary.js"
 
+//importando variables de entorno
+import dotenv from 'dotenv'
+dotenv.config()
+
 
 //creando controladores
 const create = async (req, res) => {
@@ -50,7 +54,7 @@ const getBook = async (req, res) => {
     
     const getBook = await Book.findAll({
         where:{
-            book_name: req.params.book
+            id_book: req.params.id
         },
         include: bookFile
     })

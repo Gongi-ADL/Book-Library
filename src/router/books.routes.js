@@ -8,7 +8,7 @@ const multa = multer({dest: '../uploads'})
 const router = express.Router()
 
 router.post('/book', authMid, multa.array('bookImg', 12), create)
-router.get('/book/:book', getBook)
+router.get('/book/:id', getBook)
 router.put('/book/:id', authMid, update)
 router.delete('/book/:id', authMid, destroy)
 router.get('/book', getBooks)
