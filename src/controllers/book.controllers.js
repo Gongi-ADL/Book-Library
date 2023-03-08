@@ -1,8 +1,9 @@
-import { where } from "sequelize"
+import fs from 'fs-extra'
 
 //importando modelos de tablas:
 import { Book } from "../models/books.js"
 import { bookFile } from "../models/bookFiles.js"
+import { desc } from "../models/desc.js";
 
 
 //importando controladores de Cloudinary:
@@ -10,6 +11,7 @@ import { uploadImage, deleteImage } from "../libs/Cloudinary.js"
 
 //importando variables de entorno
 import dotenv from 'dotenv'
+import { author } from "../models/author.js";
 dotenv.config()
 
 
@@ -25,13 +27,25 @@ const create = async (req, res) => {
        }
     }
 
-    const { book, price, date } = req.body
+    const { book, price, date, descrip, author, type } = req.body
     const { bookImg, ImgPublicId } = image
     try{
+        const addDesc = await desc.create({
+            type,
+            book_desc: descrip
+        })
         const newBook = await Book.create({
             book_name: book,
             book_price: price,
-            book_date: date
+            book_date: date,
+            description: addDesc.dataValues.id_desc,
+            author_book: author
+        })
+        console.log(newBook.dataValues.id_book)
+        const bookiFile = await bookFile.create({
+            book_img: bookImg,
+            cloudinary_id: ImgPublicId,
+            bookIdBook: newBook.dataValues.id_book
         })
         res.status(201).json('The book has been created')
     }catch(error){
@@ -52,13 +66,17 @@ const getBooks = async (req, res) => {
 
 const getBook = async (req, res) => {
     
-    const getBook = await Book.findAll({
-        where:{
-            id_book: req.params.id
-        },
-        include: bookFile
-    })
-    res.status(202).json(getBook)
+    try {
+        const getBook = await Book.findAll({
+            where:{
+                id_book: req.params.id
+            },
+            include: [bookFile, desc, author]
+        })
+        res.status(202).json(getBook)
+    } catch (e) {
+        console.error(e)
+    }
 }
 
 const update = async(req, res) => {
@@ -75,12 +93,24 @@ const update = async(req, res) => {
 }
 
 const destroy = async(req, res) => {
-        Book.destroy({
-            where: {
-                id_book: req.params.id
-            }
-        })
-    res.sendStatus(202)
+        try {
+            const getBook = await Book.findAll({
+                where:{
+                    id_book: req.params.id
+                },
+                include: [bookFile, desc, author]
+            })
+            const {cloudinary_id} = getBook[0].dataValues.book_file
+            deleteImage(cloudinary_id)
+            Book.destroy({
+                where: {
+                    id_book: req.params.id
+                }
+            })
+            res.sendStatus(202)
+        } catch (e) {
+            console.error(e)
+        }
 }
 
     

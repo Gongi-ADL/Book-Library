@@ -15,7 +15,7 @@ export const bookFile = db.define('book_files', {
     },
     book_file:{
         type: DataTypes.STRING,
-        allowNull: false
+        // allowNull: false
     },
     cloudinary_id: {
         type: DataTypes.STRING,
