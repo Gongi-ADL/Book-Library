@@ -65,7 +65,6 @@ const getBooks = async (req, res) => {
 
 
 const getBook = async (req, res) => {
-    
     try {
         const getBook = await Book.findAll({
             where:{
