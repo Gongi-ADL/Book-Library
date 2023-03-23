@@ -12,14 +12,6 @@ export const author = db.define('author', {
     author_name:{
         type: DataTypes.STRING,
         allowNull: false,
-    },
-    author_gender:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    author_bio:{
-        type: DataTypes.STRING,
-        allowNull: false
     }
 }, {timestamps: false})
 
