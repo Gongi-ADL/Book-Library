@@ -40,6 +40,7 @@ const loginUser = async(req, res) => {
     //desencriptando password
     let passDecrypt = await bcrypt.compare(password, accesUser[0].dataValues.user_password)
 
+    //confirmando credenciales
     if (passDecrypt == true && accesUser[0].dataValues.user_email == email){
         const uCookie = uuidv4()
         res.cookie('session_token', uCookie) //no reconoce req.cookie
@@ -50,11 +51,6 @@ const loginUser = async(req, res) => {
     } catch (error) {
         console.error(error)
     }
-    
-
-    //confirmando credenciales
-
-
 }
 
 

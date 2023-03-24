@@ -41,7 +41,6 @@ const create = async (req, res) => {
             description: addDesc.dataValues.id_desc,
             author_book: author
         })
-        console.log(newBook.dataValues.id_book)
         const bookiFile = await bookFile.create({
             book_img: bookImg,
             cloudinary_id: ImgPublicId,
@@ -52,8 +51,6 @@ const create = async (req, res) => {
         res.sendStatus(401)
         console.log(error)
     }
-    console.log(req.file)
-    console.log(req.body)
 }
 
 const getBooks = async (req, res) => {
