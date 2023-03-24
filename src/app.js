@@ -30,8 +30,8 @@ dotenv.config()
 
 const app = express()
 
-app.use(bodyparser.json())
-app.use(bodyparser.urlencoded( {extended: true} ));
+app.use(bodyparser.json({limit: '50mb'}))
+app.use(bodyparser.urlencoded( {extended: false, limit: '50mb'}, ));
 app.use(cookieParser())
 app.use(cors({origin:"http://localhost:5173", credentials: true}));
 
